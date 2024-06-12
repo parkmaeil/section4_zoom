@@ -8,26 +8,4 @@
          select * from book order by title asc
      </select>
 
-    <delete id="bookDelete">
-        delete from book where num=#{num}
-    </delete>
-
-    <insert id="bookInsert" parameterType="com.example.entity.BookDTO">
-        insert into book(title, price, author, page)
-        values(#{title},#{price},#{author},#{page})
-    </insert>
-
-    <select id="bookView" resultType="com.example.entity.BookDTO">
-        select * from book where num=#{num}
-    </select>
-
-    <update id="bookUpdate" parameterType="com.example.entity.BookDTO">
-        update book set
-        title=#{title},
-        price=#{price},
-        author=#{author},
-        page=#{page}
-        where num=#{num}
-    </update>
-
 </mapper>
