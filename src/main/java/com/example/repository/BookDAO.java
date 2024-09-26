@@ -33,15 +33,16 @@ public class BookDAO {
              ps=conn.prepareStatement(SQL);
              rs=ps.executeQuery();
              while (rs.next()){
-                   int num=rs.getInt("num");
-                   String title=rs.getString("title");
-                   int price=rs.getInt("price");
-                  String author=rs.getString("author");
-                   int page=rs.getInt("page");
-                   // 묶고(DTO)->담고(List)
-                   BookDTO dto=new BookDTO(num, title, price, author, page);
-                   //dto.setNum(num);
-                   list.add(dto);
+                 int num=rs.getInt("num");
+                 String title=rs.getString("title");
+                 int price=rs.getInt("price");
+                 String author=rs.getString("author");
+                 int page=rs.getInt("page");
+                 // 묶고(DTO)->담고(List)
+                 BookDTO dto=new BookDTO(num, title, price, author, page);
+                 //dto.setNum(num);
+                 list.add(dto);
+
              }
          }catch (Exception e){
              e.printStackTrace();
