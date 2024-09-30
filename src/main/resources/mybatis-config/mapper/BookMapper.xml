@@ -12,4 +12,23 @@
         insert into book(title, price, author, page)
         values(#{title},#{price},#{author},#{page})
     </insert>
+
+    <select id="getById"
+            parameterType="int"
+            resultType="com.example.entity.BookDTO">
+         select * from book where num=#{num}
+    </select>
+
+    <delete id="deleteById"  parameterType="int">
+         delete from book where num=#{num}
+    </delete>
+
+    <update id="update" parameterType="java.util.Map">
+        UPDATE book
+        SET title = #{dto.title},
+        price=#{dto.price},
+        author = #{dto.author},
+        page=#{dto.page}
+        WHERE num = #{num}
+    </update>
 </mapper>

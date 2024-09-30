@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.BookDTO;
-import com.example.repository.BookDAO;
+import com.example.repository.BookDAOMyBatis;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,14 +19,15 @@ public class BookDetailController extends HttpServlet {
          //  요청파라메터를 얻기  ?num=3
         int num=Integer.parseInt(req.getParameter("num")); // "3"-->3
         //   DAO 와 연동
-        BookDAO dao=new BookDAO(); // 객체생성?
-       // BookDTO dto=dao.getById(num);
-       // if(dto!=null){
-       //  req.setAttribute("dto", dto); // 객체바인딩
+        // BookDAO dao=new BookDAO(); // 객체생성?
+        BookDAOMyBatis dao=new BookDAOMyBatis();
+        BookDTO dto=dao.getById(num);
+        if(dto!=null){
+         req.setAttribute("dto", dto); // 객체바인딩
          RequestDispatcher rd=req.getRequestDispatcher("/WEB-INF/views/detail.jsp");// ${dto}
          rd.forward(req, resp); // 포워딩(가장중요한기술)
-        //}else{
-        //    throw new ServletException("not found");  // ?(X)
-       // }
+        }else{
+            throw new ServletException("not found");  // ?(X)
+        }
     }
 }

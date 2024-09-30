@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.BookDTO;
-import com.example.repository.BookDAO;
+import com.example.repository.BookDAOMyBatis;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,9 +17,10 @@ public class BookUpdateFormController extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // ?num=3
         int num=Integer.parseInt(req.getParameter("num"));
-        BookDAO dao=new BookDAO();
-       // BookDTO dto=dao.getById(num); //                        _____________
-       // req.setAttribute("dto", dto); // dto(번지)---->|____________|
+        // BookDAO dao=new BookDAO();
+        BookDAOMyBatis dao=new BookDAOMyBatis();
+        BookDTO dto=dao.getById(num); //                        _____________
+        req.setAttribute("dto", dto); // dto(번지)---->|____________|
         RequestDispatcher rd=req.getRequestDispatcher("/WEB-INF/views/update.jsp");
         rd.forward(req, resp); //------------------------------------------|
     }

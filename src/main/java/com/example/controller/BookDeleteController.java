@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.repository.BookDAO;
+import com.example.repository.BookDAOMyBatis;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +13,14 @@ import java.io.IOException;
 public class BookDeleteController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String cpath=req.getContextPath(); // /s4
+        System.out.println(cpath); // /s4
         // ?num=1
         //  요청파라메터를 얻기  ?num=3
         int num=Integer.parseInt(req.getParameter("num")); // "3"-->3
-        BookDAO dao=new BookDAO();
-       // dao.deleteById(num); // 삭제성공
-        resp.sendRedirect("/s3/list");
+        //BookDAO dao=new BookDAO();
+        BookDAOMyBatis dao=new BookDAOMyBatis();
+        dao.deleteById(num); // 삭제성공
+        resp.sendRedirect(   cpath+"/list");
     }
 }

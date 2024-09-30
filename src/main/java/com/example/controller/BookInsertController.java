@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.entity.BookDTO;
-import com.example.repository.BookDAO;
 import com.example.repository.BookDAOMyBatis;
 
 import javax.servlet.ServletException;
@@ -16,6 +15,9 @@ public class BookInsertController extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String cpath=req.getContextPath(); // /s4
+
         // 폼에서 넘어온 파라메터를 받기(4개)
         req.setCharacterEncoding("utf-8"); // 추가
         String title=req.getParameter("title");
@@ -34,7 +36,7 @@ public class BookInsertController extends HttpServlet {
         int cnt=dao.bookInsert(dto);
 
         if(cnt>0){ // 성공
-            resp.sendRedirect("/s4/list"); // http://localhost:8081/s4/list
+            resp.sendRedirect(  cpath+"/list"); // http://localhost:8081/s4/list
         }else{
             throw new ServletException("error");
         }

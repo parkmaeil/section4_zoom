@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.BookDTO;
-import com.example.repository.BookDAO;
+import com.example.repository.BookDAOMyBatis;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +14,9 @@ import java.io.IOException;
 public class BookUpdateController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String cpath=req.getContextPath();
+
          // 파라메터 5개를 가져오기(num, title, price, author, page)
          // ->BookDTO : 1. 파라메터를 수집(DTO)
         req.setCharacterEncoding("utf-8");
@@ -29,8 +32,9 @@ public class BookUpdateController extends HttpServlet {
         dto.setAuthor(author);
         dto.setPage(page);
 
-         BookDAO dao=new BookDAO();
-       //  dao.update(num, dto); // 수정성공
-         resp.sendRedirect("/s3/list");
+         //BookDAO dao=new BookDAO();
+        BookDAOMyBatis dao=new BookDAOMyBatis();
+         dao.update(num, dto); // 수정성공
+         resp.sendRedirect(cpath+"/list");
     }
 }
